@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="options.css"/>
+  <title>Настройки Base44</title>
+</head>
+<body>
+  <div class="wrap">
+    <h2>Настройки Base44 Mail Assistant</h2>
+    <div class="grid">
+      <label>Стиль по умолчанию
+        <select id="style">
+          <option>Дружелюбный</option>
+          <option>Официальный</option>
+          <option>Кратко</option>
+          <option>Убеждающий</option>
+          <option>Технический</option>
+        </select>
+      </label>
+      <label>Язык по умолчанию
+        <select id="lang">
+          <option value="ru">Русский</option>
+          <option value="en">English</option>
+          <option value="sr-Latn">Srpski</option>
+        </select>
+      </label>
+      <label>
+        Сайты интеграции (виджет включён)
+        <div class="sites">
+          <label><input type="checkbox" data-host="gmail" checked/> Gmail</label>
+          <label><input type="checkbox" data-host="yandex" checked/> Yandex</label>
+          <label><input type="checkbox" data-host="outlook" checked/> Outlook</label>
+          <label><input type="checkbox" data-host="mailru" checked/> Mail.ru</label>
+        </div>
+      </label>
+      <label>
+        Режим
+        <div class="sites">
+          <label><input type="radio" name="mode" value="mock" checked/> Только визуал (mock)</label>
+          <label><input type="radio" name="mode" value="api"/> Подключать Base44 (позже)</label>
+        </div>
+      </label>
+    </div>
+    <div class="actions">
+      <button id="save">Сохранить</button>
+      <span id="status"></span>
+    </div>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>

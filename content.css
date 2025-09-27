@@ -1,0 +1,16 @@
+/* Floating panel (kept minimal for now) */
+#b44-toast { position: fixed; right: 28px; bottom: 400px; padding:10px 12px; background:#111827; color:#fff; border-radius:8px; font-size:12px; opacity:0; transition: opacity .2s; }
+#b44-toast.show { opacity:1; }
+
+/* Inline toolbar above compose */
+#b44-inlinebar { position: relative; display:flex; align-items:center; gap:8px; padding:6px 8px; border:1px solid #e5e7eb; border-radius:10px; background:#fff; box-shadow: 0 4px 14px rgba(0,0,0,.06); margin:6px 0 10px; }
+#b44-inlinebar button, #b44-inlinebar select { height:28px; border-radius:8px; border:1px solid #e5e7eb; background:#fff; padding:0 8px; font-size:12px; }
+#b44-inlinebar button.icon { width:28px; padding:0; display:inline-flex; align-items:center; justify-content:center; }
+#b44-inlinebar .sep { width:1px; height:20px; background:#e5e7eb; }
+#b44-inlinebar .mini { font-size:11px; color:#6b7280; margin-left:auto; }
+
+#b44-inlinebar { white-space: nowrap; overflow: hidden; }
+#b44-inlinebar select { max-width: 160px; }
+#b44-inlinebar button { white-space: nowrap; }
+
+#b44-fallback { position: fixed; right: 16px; bottom: 16px; z-index: 2147483647; }

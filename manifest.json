@@ -1,0 +1,76 @@
+{
+  "manifest_version": 3,
+  "name": "Base44 Mail Assistant",
+  "version": "0.1.0",
+  "description": "Голос → текст, исправление/стили и перевод прямо в окне письма (визуальный макет без бэкенда).",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "action": {
+    "default_title": "Base44 Mail Assistant",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "storage",
+    "scripting",
+    "activeTab",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "https://mail.google.com/*",
+    "https://mail.yandex.ru/*",
+    "https://mail.yandex.com/*",
+    "https://outlook.live.com/*",
+    "https://outlook.office.com/*",
+    "https://e.mail.ru/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://mail.yandex.ru/*",
+        "https://mail.yandex.com/*",
+        "https://outlook.live.com/*",
+        "https://outlook.office.com/*",
+        "https://e.mail.ru/*"
+      ],
+      "js": [
+        "content/content.js"
+      ],
+      "css": [
+        "content/content.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "commands": {
+    "toggle-voice": {
+      "suggested_key": {
+        "default": "Alt+V"
+      },
+      "description": "Голосовой ввод"
+    },
+    "rewrite": {
+      "suggested_key": {
+        "default": "Alt+R"
+      },
+      "description": "Исправить/переписать"
+    },
+    "translate": {
+      "suggested_key": {
+        "default": "Alt+T"
+      },
+      "description": "Перевести"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
+}
