@@ -10,7 +10,7 @@
   },
   "action": {
     "default_title": "Base44 Mail Assistant",
-    "default_popup": "popup.html"
+    "default_popup": "popup/popup.html"
   },
   "background": {
     "service_worker": "background.js"
@@ -19,7 +19,8 @@
     "storage",
     "scripting",
     "activeTab",
-    "contextMenus"
+    "contextMenus",
+    "microphone"
   ],
   "host_permissions": [
     "https://mail.google.com/*",
@@ -70,7 +71,7 @@
     }
   },
   "options_ui": {
-    "page": "options.html",
+    "page": "options/options.html",
     "open_in_tab": true
   }
 }
