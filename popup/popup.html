@@ -8,12 +8,12 @@
 </head>
 <body>
 <header>
-  <img src="icons/48.png" width="20" height="20"/>
+  <img src="../icons/48.png" width="20" height="20"/>
   <div class="title">Base44 Mail Assistant</div>
 </header>
 <main>
   <div class="row">
-    <label>Язык интерфейса</label>
+    <label for="uiLang">Язык интерфейса</label>
     <select id="uiLang">
       <option value="ru">Русский</option>
       <option value="en">English</option>
@@ -21,7 +21,10 @@
     </select>
   </div>
   <div class="account">
-    <div class="mini" id="subInfo">Тариф: Пробный · до —</div>
+    <div>
+      <div class="mini" id="subPlan">Тариф: Пробный</div>
+      <div class="mini" id="subDates">Период подписки: —</div>
+    </div>
     <div class="links">
       <a id="openOptions" href="#">Настройки</a>
       <a id="openAccount" href="#">Личный кабинет</a>

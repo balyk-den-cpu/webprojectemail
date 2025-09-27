@@ -1,13 +1,17 @@
 const $ = (s) => document.querySelector(s)
 const $$ = (s) => Array.from(document.querySelectorAll(s))
 
-chrome.storage.sync.get(["style","lang","hosts","mode"], (r)=>{
+chrome.storage.sync.get(["style","lang","hosts","mode","uiLang","subscription"], (r)=>{
   if (r.style) $("#style").value = r.style
   if (r.lang) $("#lang").value = r.lang
   if (r.mode) $$("input[name='mode']").forEach(i=> i.checked = (i.value===r.mode))
   if (r.hosts) {
     $$(".sites input[type='checkbox']").forEach(cb=> cb.checked = !!r.hosts[cb.dataset.host])
   }
+  $("#uiLangOptions").value = r.uiLang || "ru"
+  const sub = r.subscription || { plan: "Пробный тариф", start: "—", until: "—" }
+  $("#subSummary").textContent = `Подписка: ${sub.plan}`
+  $("#subPeriod").textContent = `Период: ${sub.start} – ${sub.until}`
 })
 
 $("#save").onclick = ()=>{
@@ -21,3 +25,11 @@ $("#save").onclick = ()=>{
     setTimeout(()=> $("#status").innerText = "", 1200)
   })
 }
+
+$("#uiLangOptions").addEventListener('change', (e)=>{
+  chrome.storage.sync.set({ uiLang: e.target.value })
+})
+
+$("#openAccount").addEventListener('click', ()=>{
+  chrome.runtime.sendMessage({ type:"OPEN_TAB", url:"https://app.your-base44.app/account" })
+})

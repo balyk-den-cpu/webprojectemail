@@ -9,15 +9,18 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (!tab?.id) return
   if (info.menuItemId === "rewrite") {
-    chrome.tabs.sendMessage(tab.id, { type: "CMD_REWRITE_SELECTION" })
+    chrome.tabs.sendMessage(tab.id, { type: "CMD_TRIGGER_REWRITE" })
   }
   if (info.menuItemId === "translate") {
-    chrome.tabs.sendMessage(tab.id, { type: "CMD_TRANSLATE_SELECTION" })
+    chrome.tabs.sendMessage(tab.id, { type: "CMD_TRIGGER_TRANSLATE" })
   }
 })
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  const done = (data) => setTimeout(() => sendResponse({ ok: true, data }), MOCK_LATENCY_MS)
+  const done = (data) => {
+    setTimeout(() => sendResponse({ ok: true, data }), MOCK_LATENCY_MS)
+    return true
+  }
   if (msg.type === "API_REWRITE") {
     const { text, style } = msg.payload
     return done(`[${style}] ${text}`)
@@ -37,4 +40,18 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     return sendResponse({ ok: true })
   }
   return false
+})
+
+chrome.commands.onCommand.addListener(async (command) => {
+  if (!command) return
+  const actionable = ["rewrite", "translate", "toggle-voice"]
+  if (!actionable.includes(command)) return
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+  if (!tab?.id) return
+  const map = {
+    "rewrite": { type: "CMD_TRIGGER_REWRITE" },
+    "translate": { type: "CMD_TRIGGER_TRANSLATE" },
+    "toggle-voice": { type: "CMD_TOGGLE_VOICE" }
+  }
+  chrome.tabs.sendMessage(tab.id, map[command])
 })
